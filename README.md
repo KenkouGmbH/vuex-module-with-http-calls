@@ -40,7 +40,7 @@ const httpCalls = [
     url: 'GetUserProfile',
     method: 'post',
     resultToStateField: 'profile',
-    onSuccess: data => console.log('request went fine, result:', data)
+    onSuccess: data => console.log('request went fine, result:', data),
     onError: {
       // keys are the http status response
       '401': error => console.log('Unauthorized', error),
