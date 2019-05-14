@@ -6,6 +6,7 @@
   "repository": "https://github.com/KenkouGmbH/vuex-module-with-http-calls",
   "author": "Robert Carcasses Quevedo <carcasses@gmail.com>",
   "license": "MIT",
+  "keywords": ["vuex", "vue", "axios", "http", "module"],
   "files": [
     "index.js"
   ],
