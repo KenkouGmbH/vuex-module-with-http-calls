@@ -1,3 +1,7 @@
+[![NPM](https://nodei.co/npm/vuex-module-with-http-calls.png)](https://nodei.co/npm/vuex-module-with-http-calls/)
+[![npm](https://img.shields.io/npm/dm/vuex-module-with-http-calls.svg?style=flat-square)](https://www.npmjs.com/package/vuex-module-with-http-calls)
+
+
 # vuex-module-with-http-calls
 
 A helper function to automatically create vuex modules with http calls as actions.
@@ -113,3 +117,7 @@ You can configure to send an `Authorization: Bearer token` header on each http r
 store.dispatch('profile/setToken', { token: 'ey...' }, { root: true })
 ```
 From now on your module request will have the `Authorization: Bearer ey...` header.
+
+# Sponsors
+
+[Kenkou GmbH](https://kenkou.de)
