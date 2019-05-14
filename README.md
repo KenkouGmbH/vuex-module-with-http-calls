@@ -23,17 +23,21 @@ import { withHttpCalls } from 'vuex-module-with-http-calls'
 const baseURL = 'https://example.com/api'
 
 const httpCalls = [
-  // results in a call to `GET https://example.com/api/DeleteUserProfile`
+  // results in an action `DeleteUserProfile` that calls
+  // `GET https://example.com/api/DeleteUserProfile`
   // notice that GET is the default method
   { url: 'DeleteUserProfile' },
-  // results in a call to `DELETE https://example.com/api/DeleteUserProfile`
+  // results in an action `DeleteUserProfile` that calls 
+  // `DELETE https://example.com/api/DeleteUserProfile`
   { url: 'DeleteUserProfile', method: 'delete' },
-  // results in a call to `POST https://example.com/api/GetUserProfile` with
-  // data = { uid: "137faa4c-e8d7-4a98-8945-37dd7fe21af8" } argument in the
-  // body. The result of the call will be stored in `state.profile` property
+  // results in a named action `getProfile` that calls 
+  // `POST https://example.com/api/GetUserProfile`
+  // the result of the call will be stored in `state.profile` property
+  // you can call the generated action with some argument
+  //    getProfile({ uid: "137faa4c-e8d7-4a98-8945-37dd7fe21af8" })
   {
+    name: 'getProfile',
     url: 'GetUserProfile',
-    data: { uid: '137faa4c-e8d7-4a98-8945-37dd7fe21af8' },
     method: 'post',
     resultToStateField: 'profile',
     onSuccess: data => console.log('request went fine, result:', data)
@@ -54,7 +58,7 @@ const profileModule = withHttpCalls({
 
 export default profileModule
 ```
-Notice that `url`, `method` and `data` will be passed to the underlying `axios.request` method at the moment of performing the http call. The `httpCalls` examples are organized in an ascending complexity way here to point out the many options we may pass but the only required field is the `url` one. All the actions created to perform the `http` calls are marked as `async`. 
+Notice that `url`, `method` and `data` will be passed to the underlying `axios.request` method at the moment of performing the http call. If no `name` property is passed then the `url` is used as the action name. The `httpCalls` examples are organized in an ascending complexity way here to point out the many options we may pass but the only required field is the `url` one. All the actions created to perform the `http` calls are marked as `async`. 
 
 Then you can later register the `vuex` module `profileModule` by doing:
 ```javascript
