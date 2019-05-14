@@ -1,12 +1,18 @@
 {
   "name": "vuex-module-with-http-calls",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A helper function to automatically create vuex modules with http calls as actions.",
   "main": "index.js",
   "repository": "https://github.com/KenkouGmbH/vuex-module-with-http-calls",
   "author": "Robert Carcasses Quevedo <carcasses@gmail.com>",
   "license": "MIT",
-  "keywords": ["vuex", "vue", "axios", "http", "module"],
+  "keywords": [
+    "vuex",
+    "vue",
+    "axios",
+    "http",
+    "module"
+  ],
   "files": [
     "index.js"
   ],
