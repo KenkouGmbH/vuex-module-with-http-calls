@@ -64,7 +64,6 @@ export const withHttpCalls = ({
       state[key] = value
     }
   }
-  console.log('httpCalls: ', httpCalls)
 
   actions = httpCalls.reduce(
     (obj, def) =>
@@ -72,12 +71,9 @@ export const withHttpCalls = ({
         enumerable: true,
         configurable: true,
         value: async function({ commit }, actionArgs) {
-          console.debug(
-            `calling ${def.name} with payload ${JSON.stringify(actionArgs)}`
-          )
           try {
             let requestPayload = {
-              data: actionsArgs,
+              data: actionArgs,
               url: def.url,
               method: `${def.method ? def.method : 'get'}`
             }
@@ -94,18 +90,19 @@ export const withHttpCalls = ({
             return data
           } catch (e) {
             // if we need to do something with the result
-            if (def.onError) {
+            if (def.onError && typeof def.onError === 'function') {
               def.onError(e)
             }
             // if we need to do something on specific error status
-            if (e.response && e.response.status && def[e.response.status]) {
-              def[e.status](e)
+            if (
+              e.response &&
+              e.response.status &&
+              typeof def.onError === 'object' &&
+              def.onError[e.response.status] &&
+              typeof def.onError[e.response.status] === 'function'
+            ) {
+              def.onError[e.response.status](e)
             }
-            console.log(`something went wrong while calling grpc
-                proxied method ${def.name} with argument
-                ${
-                  actionArgs ? JSON.stringify(actionArgs) : 'empty'
-                }, got error ${e}`)
           }
         }
       }),
@@ -116,9 +113,6 @@ export const withHttpCalls = ({
       }
     }
   )
-
-  console.log('actions: ', actions)
-
   // return the vuex module
   return {
     namespaced,
