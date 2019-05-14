@@ -87,7 +87,7 @@ somewhere in your code.
 The module by default has:
 
 - `namespaced = true`.
-- `state = { requesting: false, token: '' }`.
+- `state = { requesting: false, token: '' }`. The `requesting` field will be set to true when a `http` call starts and false when completed and it can be used to display loaders while requesting, for example.
 - `getters = {}`.
 - A `mutation` `set` which just update the correspondent `key` in the `state` with the passed `value`.
 - An `action` `setToken` which can be used to set the authentication `jwt` token header, see next section.
