@@ -84,7 +84,15 @@ somewhere in your code.
 
 ## Default content of the module
 
-The module by default is namespaced (`namespaced: true`), has an empty `state` and `getters` objects, a single mutation function `set` which receives as argument `key` and `value` and simply do `state[key] = value`, and an action `setToken` which can be used to set the authentication jwt token header, see next section. Any additional `state`, `gettters`, `actions` and `mutations` provided to the `withHttpCalls` function 
+The module by default has:
+
+- `namespaced = true`.
+- `state = { requesting: false, token: '' }`.
+- `getters = {}`.
+- A `mutation` `set` which just update the correspondent `key` in the `state` with the passed `value`.
+- An `action` `setToken` which can be used to set the authentication `jwt` token header, see next section.
+ 
+Any additional `state`, `gettters`, `actions` and `mutations` provided to the `withHttpCalls` function:
 ```javascript
 const profileModule = withHttpCalls({
   baseURL,
