@@ -54,7 +54,7 @@ const profileModule = withHttpCalls({
 
 export default profileModule
 ```
-Notice that `url`, `method` and `data` will be passed to the underlying `axios.request` method at the moment of doing the call. The `httpCalls` examples are organized in a complexity ascending way here to point out the many options we may pass but the only required field is the `url` one. All the actions created to perform the `http` calls are marked as `async`. 
+Notice that `url`, `method` and `data` will be passed to the underlying `axios.request` method at the moment of performing the http call. The `httpCalls` examples are organized in an ascending complexity way here to point out the many options we may pass but the only required field is the `url` one. All the actions created to perform the `http` calls are marked as `async`. 
 
 Then you can later register the `vuex` module `profileModule` by doing:
 ```javascript
