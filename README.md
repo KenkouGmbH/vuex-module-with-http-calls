@@ -17,7 +17,7 @@ npm install --save vuex-module-with-http-calls
 
 Let's suppose that we want to define a `vuex` module called `profile`. We can, for instance, create a file file `profile-vuex-module.js` and put some content inside:
 
-```
+```javascript
 import { withHttpCalls } from 'vuex-module-with-http-calls'
 
 const baseURL = 'https://example.com/api'
@@ -57,7 +57,7 @@ export default profileModule
 Notice that `url`, `method` and `data` will be passed to the underlying `axios.request` method at the moment of doing the call. The `httpCalls` examples are organized in a complexity ascending way here to point out the many options we may pass but the only required field is the `url` one. All the actions created to perform the `http` calls are marked as `async`. 
 
 Then you can later register the `vuex` module `profileModule` by doing:
-```
+```javascript
 import profileModule from './profile-vuex-module'
 ...
 // here `store` is the `vuex` store instance
@@ -66,7 +66,7 @@ store.registerModule('profile', profileModule)
 ...
 ```
 or
-```
+```javascript
 // or at store creation time
 ...
 const store = new Vuex.Store({
@@ -80,8 +80,8 @@ somewhere in your code.
 
 ## Default content of the module
 
-The module by default has an empty `state` and `getters` objects, a single mutation `set` which receives as argument `key` and `value` and simply do `state[key] = value`, and an action `setToken` which can be used to set the authentication jwt token header, see next section. Any additional `state`, `gettters`, `actions` and `mutations` provided to the `withHttpCalls` function 
-```
+The module by default is namespaced (`namespaced: true`), has an empty `state` and `getters` objects, a single mutation function `set` which receives as argument `key` and `value` and simply do `state[key] = value`, and an action `setToken` which can be used to set the authentication jwt token header, see next section. Any additional `state`, `gettters`, `actions` and `mutations` provided to the `withHttpCalls` function 
+```javascript
 const profileModule = withHttpCalls({
   baseURL,
   httpCalls,
@@ -92,12 +92,12 @@ const profileModule = withHttpCalls({
   namespaced: true // or false as needed
 })
 ```
-will be merged with these. The module created by default has `namespaced = true`.
+will be merged with these.
 
 ## Authentication
 
 You can configure to send an `Authorization: Bearer token` header on each http request by setting the `token` in the module state using the built in `setToken` action. Let's assume that somewhere in your app you authenticate against your authentication server and you get a valid `JWT` token in exchange, then you can dispacth the `setToken` action, for instance from another `vuex` module action body, by doing:
-```
+```javascript
 store.dispatch('profile/setToken', { token: 'ey...' }, { root: true })
 ```
-From now on your module request will `Authorization: Bearer ey...` header.
+From now on your module request will have the `Authorization: Bearer ey...` header.
